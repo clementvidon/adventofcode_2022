@@ -40,12 +40,27 @@ function itemsValue(items) {
   return value;
 }
 
-function firstCommonItem(s1, s2) {
-  for (const i in s1) {
-    if (s2.includes(s1[i])) {
-      return s1[i];
+function intersection(...arrs) {
+  let result = [];
+  for (let i = 0; i < arrs.length; i++) {
+    let arr = arrs[i];
+    for (let j = 0; j < arr.length; j++) {
+      let elem = arr[j];
+      if (result.indexOf(elem) === -1) {
+        let existsInAll = true;
+        for (let k = 0; k < arrs.length; k++) {
+          if (arrs[k].indexOf(elem) === -1) {
+            existsInAll = false;
+            break;
+          }
+        }
+        if (existsInAll) {
+          result.push(elem);
+        }
+      }
     }
   }
+  return result;
 }
 
 function challenge_1(sacks) {
@@ -54,18 +69,18 @@ function challenge_1(sacks) {
     let sackList = sacks[i].length;
     let compartmentOne = sacks[i].slice(0, sackList / 2);
     let compartmentTwo = sacks[i].slice(sackList / 2, sackList);
-    commonItems.push(firstCommonItem(compartmentOne, compartmentTwo));
+    commonItems.push(intersection(compartmentOne, compartmentTwo)[0]);
   }
   return calcSum(...itemsValue(commonItems));
 }
 
 function challenge_2(sacks) {
   let badges = [];
-  for (let i = 0; i < sacks.length; i += 3) {
-    badges.push(firstCommonItem(...sacks.slice(i, i + 3)));
+  for (let i = 0; i < sacks.length - 1; i += 3) {
+    badges.push(intersection(...sacks.slice(i, i + 3))[0]);
   }
   return calcSum(...itemsValue(badges));
 }
 
 console.log("challenge_1 = " + challenge_1(input)); // 7824
-console.log("challenge_2 = " + challenge_2(input)); // 2778 XXX
+console.log("challenge_2 = " + challenge_2(input)); // 2798
