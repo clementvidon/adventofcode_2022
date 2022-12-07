@@ -8,9 +8,9 @@ function toNumber(value) {
 }
 
 function challenge_1(pairs) {
-  var overlap = 0;
-  var s = [];
-  for (var i = 0; i < pairs.length - 1; i++) {
+  let overlap = 0;
+  let s = [];
+  for (let i = 0; i < pairs.length - 1; i++) {
     s = pairs[i].match(/\d+/g).map(toNumber);
     if (s[0] >= s[2] && s[1] <= s[3]) {
       overlap += 1;
@@ -22,9 +22,9 @@ function challenge_1(pairs) {
 }
 
 function challenge_2(pairs) {
-  var overlap = 0;
-  var s = [];
-  for (var i = 0; i < pairs.length - 1; i++) {
+  let overlap = 0;
+  let s = [];
+  for (let i = 0; i < pairs.length - 1; i++) {
     s = pairs[i].match(/\d+/g).map(toNumber);
     if (s[0] >= s[2] && s[1] <= s[3]) {
       overlap += 1;
@@ -39,5 +39,5 @@ function challenge_2(pairs) {
   return overlap;
 }
 
-console.log("challenge_2 = " + challenge_2(input));
-console.log("challenge_1 = " + challenge_1(input));
+console.log("challenge_1 = " + challenge_1(input)); // 536
+console.log("challenge_2 = " + challenge_2(input)); // 845
